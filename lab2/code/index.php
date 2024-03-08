@@ -59,3 +59,19 @@ echo "#12\n";
 echo 8 ** 2;
 
 echo "\n\n";
+
+
+// #13
+
+echo "#13\n";
+
+$my_num = 8148;
+$answer = $my_num;
+$answer += 2;
+$answer *= 2;
+$answer -= 2;
+$answer /= 2;
+$answer -= $my_num;
+echo $answer;
+
+echo "\n\n";
