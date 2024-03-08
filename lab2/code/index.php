@@ -290,3 +290,110 @@ function sumDig($num)
 echo sumDig(12345);
 
 echo "\n\n";
+
+
+// #17
+
+echo "#17\n";
+
+function fill(&$arr)
+{
+    $con = 'x';
+    for($i = 0; $i < count($arr); $i++)
+    {
+        $arr[$i] = $con;
+        $con .= 'x';
+    }
+}
+
+$arr = [null, null, null, null];
+fill($arr);
+var_dump($arr);
+
+echo "\n";
+
+function arrayFill($val, $param)
+{
+    $arr = [];
+    for($i = 0; $i < $param; $i++)
+    {
+        array_push($arr, $val);
+    }
+    return $arr;
+}
+var_dump(arrayFill('x', 10));
+
+echo "\n";
+
+function sumArr($arr)
+{
+    $sum = 0;
+    for($i = 0; $i < count($arr); $i++)
+    {
+        for($j = 0; $j < count($arr[$i]); $j++)
+        {
+            $sum += $arr[$i][$j];
+        }
+    }
+    return $sum;
+}
+
+$arr = [[1, 2, 3], [4, 5], [6]];
+echo sumArr($arr);
+
+echo "\n";
+
+$arr = [];
+$num = 1;
+for($i = 0; $i < 3; $i++)
+{
+    array_push($arr, []);
+    for($j = 0; $j < 3; $j++)
+    {
+        $arr[$i][$j] = $num;
+        $num++;
+    }
+}
+var_dump($arr);
+
+echo "\n";
+
+$arr = [2, 5, 3, 9];
+$sum = 0;
+for($i = 1; $i < count($arr); $i++)
+{
+    $sum += $arr[$i - 1] * $arr[$i];
+}
+$result = $sum;
+echo $result;
+
+echo "\n";
+
+$user = [
+    'name' => 'Артём',
+    'surname' => 'Бояркин',
+    'patronymic' => 'Денисович'
+];
+echo $user['surname'] . ' ' . $user['name'] . ' ' . $user['patronymic'];
+
+echo "\n";
+
+$date = [
+    'year' => 2024,
+    'month' => 3,
+    'day' => 8
+];
+
+echo $date['year'] . '-' . $date['month'] . '-' . $date['day'];
+
+echo "\n";
+
+$arr = ['a', 'b', 'c', 'd', 'e'];
+echo count($arr);
+
+echo "\n";
+
+$arr = ['a', 'b', 'c', 'd', 'e'];
+echo $arr[count($arr)-1] . ' ' . $arr[count($arr)-2];
+
+echo "\n\n";
