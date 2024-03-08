@@ -13,3 +13,28 @@ echo "#1";
   
 // Don't change the line below
 echo "\nYour order is: $very_bad_unclear_name.";
+
+
+// #2
+
+echo "\n\n#2\n";
+
+$num = 10;
+echo $num;
+ 
+echo "\n";
+ 
+$special_num = 81.48;
+echo $special_num;
+ 
+echo "\n";
+ 
+echo $num + 2;
+ 
+echo "\n";
+ 
+$last_month = 1187.23;
+$this_month = 1089.98;
+echo $last_month - $this_month;
+ 
+echo "\n\n";
