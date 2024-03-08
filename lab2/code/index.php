@@ -467,3 +467,40 @@ for($i = 0; $i < 20; $i++)
 }
 
 echo "\n\n";
+
+
+// #20
+
+echo "#20\n";
+
+function avg($arr)
+{
+    return array_sum($arr) / count($arr);
+}
+$arr = [1, 4, 6, 87, 65];
+echo avg($arr);
+
+echo "\n";
+
+echo array_sum(range(1, 100));
+
+echo "\n";
+
+$arr = [1, 42, 9, 16];
+$arr = array_map('sqrt', $arr);
+var_dump($arr);
+
+echo "\n";
+
+$arr1 = range('a', 'z');
+$arr2 = range(1, 26);
+$arr = array_combine($arr1, $arr2);
+var_dump($arr);
+
+echo "\n";
+
+$str = '1234567890';
+$sum = array_sum(str_split($str, 2));
+echo $sum;
+
+echo "\n";
