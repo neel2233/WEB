@@ -51,3 +51,11 @@ $days_per_language = $days / $num_languages;
 echo $days_per_language;
 
 echo "\n\n";
+
+// #12
+
+echo "#12\n";
+
+echo 8 ** 2;
+
+echo "\n\n";
