@@ -210,4 +210,19 @@ foreach($arr as $x)
     }
 }
 
-echo "\n";
+echo "\n\n";
+
+
+// #15
+
+echo "#15\n";
+
+function printStringReturnNumber()
+{
+    echo "string\n";
+    return 8148;
+}
+$my_num = printStringReturnNumber();
+echo $my_num;
+
+echo "\n\n";
