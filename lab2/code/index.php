@@ -226,3 +226,67 @@ $my_num = printStringReturnNumber();
 echo $my_num;
 
 echo "\n\n";
+
+
+// #16
+
+function increaseEnthusiasm($str)
+{
+    return $str . '!';
+}
+echo increaseEnthusiasm('adadadadadadadada');
+
+echo "\n";
+
+function repeatThreeTimes($str)
+{
+    return $str . $str . $str;
+}
+echo repeatThreeTimes('da');
+
+echo "\n";
+
+echo increaseEnthusiasm(repeatThreeTimes('real'));
+
+echo "\n";
+
+function cut($str, $param = 10)
+{
+    return substr($str, 0, $param);
+}
+echo cut('12321', 2);
+
+echo "\n";
+
+function show($arr, $i = 0)
+{
+    if($i < count($arr))
+    {
+        echo "$arr[$i] ";
+        show($arr, $i + 1);
+    } 
+}
+$arr = [2, 24, 4322, 2345, 5, 54, 624, -4321];
+show($arr);
+
+echo "\n";
+
+function sumDig($num)
+{
+    $sum = 0;
+    while($num > 0)
+    {
+        $sum += $num % 10;
+        $num  = floor($num / 10);
+    }
+    if ($sum > 9)
+    {
+        return sumDig($sum);
+    } else {
+        return $sum;
+    }
+}
+
+echo sumDig(12345);
+
+echo "\n\n";
