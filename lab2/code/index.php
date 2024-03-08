@@ -452,4 +452,18 @@ function threeSum($arr)
 }
 threeSum([4, 5, 67]);
 
-echo "\n";
+echo "\n\n";
+
+
+// #19
+
+echo "#19\n";
+
+$val = 'x';
+for($i = 0; $i < 20; $i++)
+{
+    echo $val . "\n";
+    $val .= 'x';   
+}
+
+echo "\n\n";
