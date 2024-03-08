@@ -397,3 +397,59 @@ $arr = ['a', 'b', 'c', 'd', 'e'];
 echo $arr[count($arr)-1] . ' ' . $arr[count($arr)-2];
 
 echo "\n\n";
+
+
+// #18
+
+echo "#18\n";
+
+function isSum($a, $b)
+{
+    return $a + $b > 10;
+}
+
+function isEqual($a, $b)
+{
+    return $a == $b;
+}
+
+$test = 0;
+if ($test == 0) {
+    echo 'верно';
+}
+echo "\n";
+//Сокращенно
+
+echo $test == 0 ? 'верно' : '';
+
+echo "\n";
+
+function func($age)
+{
+    if($age < 10 || $age > 99)
+    {
+        echo 'Возраст больше 99 или меньше 10';
+    } else {
+        $sum = ($age % 10) + (floor($age / 10));
+        if ($sum <= 9)
+        {
+            echo 'Число однозначное';
+        } else {
+            echo 'Число двузначное';
+        }
+    }
+}
+func(23);
+
+echo "\n";
+
+function threeSum($arr)
+{
+    if(count($arr) == 3)
+    {
+        echo $arr[0] + $arr[1] + $arr[2];
+    }
+}
+threeSum([4, 5, 67]);
+
+echo "\n";
