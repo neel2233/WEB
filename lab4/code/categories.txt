@@ -1,0 +1,4 @@
+cars
+clothes
+gadgets
+other

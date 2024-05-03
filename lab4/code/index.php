@@ -1,4 +1,16 @@
+<?php
+require 'vendor/autoload.php';
+$client = new \Google_Client();
+$client->setApplicationName('Google Sheets API');
+$client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
+$client->setAccessType('offline');
+$path = 'credentials.json';
+$client->setAuthConfig($path);
 
+$service = new \Google_Service_Sheets($client);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,17 +27,9 @@
         <label for='category'>Категории</label>
         <select name='category'>
             <?php
-            $categories = [];
-            $dir = opendir('categories');
-            while($file = readdir($dir)) 
-            {
-            if (is_dir('categories/'.$file) && $file != '.' && $file != '..') 
-            {
-                array_push($categories, $file);
-            }
-            }
-            closedir($dir);
-            sort($categories);
+            $file = fopen('categories.txt', 'r');
+            $text = fread($file, filesize('categories.txt'));
+            $categories = explode("\n", $text);
             foreach($categories as $category)
             {
                 echo "<option value='$category'> $category </option>";
@@ -52,57 +56,7 @@
             </thread>
             <tbody>
             <?php
-            $categories = [];
-            $dir = opendir('categories');
-            while($file = readdir($dir)) 
-            {
-            if (is_dir('categories/'.$file) && $file != '.' && $file != '..') 
-            {
-                array_push($categories, $file);
-            }
-            }
-            closedir($dir);
-            foreach($categories as $category)
-            {
-                $users = [];
-                $dir = opendir("categories/$category");
-                while($file = readdir($dir)) 
-                {
-                    if (is_dir("categories/$category/".$file) && $file != '.' && $file != '..') 
-                    {
-                        array_push($users, $file);
-                    }
-                }
-                closedir($dir);
-                foreach($users as $user)
-                {
-                    $items = [];
-                    $dir = opendir("categories/$category/$user");
-                    while($file = readdir($dir)) 
-                    {
-                        if (is_file("categories/$category/$user/".$file) && $file != '.' && $file != '..') 
-                        {
-                            array_push($items, $file);
-                        }
-                    }
-                    closedir($dir);
-                        foreach($items as $item)
-                        {
-                            $file = fopen("categories/$category/$user/$item", 'r');
-                            $text = fread($file, filesize("categories/$category/$user/$item"));
-                            fclose($file);
-                            $title = preg_replace('/.txt/', '', $item);
-                            echo "
-                            <tr>
-                                <td>$category</td>
-                                <td>$title</td>
-                                <td>$user</td>
-                                <td>$text</td>
-                            </tr>
-                            ";
-                    }
-                }
-            }
+            
             ?>
             </tbody>
         </table>
