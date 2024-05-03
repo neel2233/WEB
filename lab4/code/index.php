@@ -9,6 +9,8 @@ $client->setAuthConfig($path);
 
 $service = new \Google_Service_Sheets($client);
 
+$spreadsheetID = "1XA8j5N3baUvPhPHG8SBJyTkRefRUWSeNUefSwkDlwWU";
+$spreadsheet = $service->spreadsheets->get($spreadsheetID);
 
 ?>
 <!DOCTYPE html>
@@ -56,7 +58,19 @@ $service = new \Google_Service_Sheets($client);
             </thread>
             <tbody>
             <?php
-            
+            $range = 'Лист1';
+            $response = $service->spreadsheets_values->get($spreadsheetID, $range);
+            $rows = $response->getValues();
+            array_shift($rows);
+            foreach($rows as $row)
+            {
+                echo '<tr>';
+                for($i = 0; $i < 4; $i++)
+                {
+                    echo "<td>{$row[$i]}</td>";
+                }
+                echo'</tr>';
+            }
             ?>
             </tbody>
         </table>

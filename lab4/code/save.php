@@ -1,4 +1,16 @@
 <?php
+require 'vendor/autoload.php';
+$client = new \Google_Client();
+$client->setApplicationName('Google Sheets API');
+$client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
+$client->setAccessType('offline');
+$path = 'credentials.json';
+$client->setAuthConfig($path);
+
+$service = new \Google_Service_Sheets($client);
+
+$spreadsheetID = "1XA8j5N3baUvPhPHG8SBJyTkRefRUWSeNUefSwkDlwWU";
+$spreadsheet = $service->spreadsheets->get($spreadsheetID);
 function redirectToHome()
 {
     header('Location: index.php');
@@ -14,17 +26,18 @@ $category = $_POST['category'];
 $title = $_POST['title'];
 $text = $_POST['text'];
 $email = $_POST['email'];
-if(!is_dir("categories/$category/$email"))
-{
-    mkdir("categories/$category/$email");
-}
-chmod("categories/$category/$email", 0777);
-$filePath = "categories/$category/$email/$title.txt";
 
+$newRow = [
+    $category,
+    $title,
+    $email,
+    $text
+];
 
-if(false === file_put_contents($filePath, $text))
-{
-    throw new Exception('Somathing went wrong');
-}
-chmod($filePath, 0777);
+$rows = [$newRow];
+$valueRange = new \Google_Service_Sheets_ValueRange();
+$valueRange->setValues($rows);
+$range = 'Лист1';
+$options = ['valueInputOption' => 'RAW'];
+$service->spreadsheets_values->append($spreadsheetID, $range, $valueRange, $options);
 redirectToHome();
