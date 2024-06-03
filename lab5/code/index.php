@@ -1,4 +1,21 @@
+<?php
+$mysqli = new mysqli('db', 'root', 'helloworld', 'web');
 
+if (mysqli_connect_errno()) {
+    printf("Подключение к серверу MySQL невозможно. Код ошибки: %s\n", mysqli_connect_error());
+    exit;
+}
+
+$ads = [];
+if ($result = $mysqli->query('SELECT * FROM ad ORDER BY created DESC')) {
+    while ($row = $result->fetch_assoc()) {
+        array_push($ads, $row);
+    }
+    $result->close();
+}
+
+$mysqli->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,23 +31,10 @@
 
         <label for='category'>Категории</label>
         <select name='category'>
-            <?php
-            $categories = [];
-            $dir = opendir('categories');
-            while($file = readdir($dir)) 
-            {
-            if (is_dir('categories/'.$file) && $file != '.' && $file != '..') 
-            {
-                array_push($categories, $file);
-            }
-            }
-            closedir($dir);
-            sort($categories);
-            foreach($categories as $category)
-            {
-                echo "<option value='$category'> $category </option>";
-            }
-            ?>
+            <option value="cars">cars</option>
+            <option value="clothes">clothes</option>
+            <option value="gadgets">gadgets</option>
+            <option value="other">other</option>
         </select><br>
         <label for='title'>Загаловок объявления</label>
         <input type='text' name='title'></input><br>
@@ -52,56 +56,14 @@
             </thread>
             <tbody>
             <?php
-            $categories = [];
-            $dir = opendir('categories');
-            while($file = readdir($dir)) 
+            foreach($ads as $ad)
             {
-            if (is_dir('categories/'.$file) && $file != '.' && $file != '..') 
-            {
-                array_push($categories, $file);
-            }
-            }
-            closedir($dir);
-            foreach($categories as $category)
-            {
-                $users = [];
-                $dir = opendir("categories/$category");
-                while($file = readdir($dir)) 
-                {
-                    if (is_dir("categories/$category/".$file) && $file != '.' && $file != '..') 
-                    {
-                        array_push($users, $file);
-                    }
-                }
-                closedir($dir);
-                foreach($users as $user)
-                {
-                    $items = [];
-                    $dir = opendir("categories/$category/$user");
-                    while($file = readdir($dir)) 
-                    {
-                        if (is_file("categories/$category/$user/".$file) && $file != '.' && $file != '..') 
-                        {
-                            array_push($items, $file);
-                        }
-                    }
-                    closedir($dir);
-                        foreach($items as $item)
-                        {
-                            $file = fopen("categories/$category/$user/$item", 'r');
-                            $text = fread($file, filesize("categories/$category/$user/$item"));
-                            fclose($file);
-                            $title = preg_replace('/.txt/', '', $item);
-                            echo "
-                            <tr>
-                                <td>$category</td>
-                                <td>$title</td>
-                                <td>$user</td>
-                                <td>$text</td>
-                            </tr>
-                            ";
-                    }
-                }
+                echo "<tr>";
+                echo "<td>" . ($ad['category']) . "</td>";
+                echo "<td>" . ($ad['title']) . "</td>";
+                echo "<td>" . ($ad['email']) . "</td>";
+                echo "<td>" . ($ad['description']) . "</td>";
+                echo "</tr>";
             }
             ?>
             </tbody>

@@ -12,7 +12,7 @@ if(false === isset($_POST['email'], $_POST['category'], $_POST['title'], $_POST[
 
 $category = $_POST['category'];
 $title = $_POST['title'];
-$text = $_POST['text'];
+$description = $_POST['text'];
 $email = $_POST['email'];
 $mysqli = new mysqli('db', 'root', 'helloworld', 'web');
 
